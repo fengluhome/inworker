@@ -64,16 +64,4 @@ inWorker.postMessage({
 
 });
 
-
-inWorker.postMessage({
-    name: "ajaxCompute.add",
-    argument: {
-        a: 1,
-        b: 2
-    },
-    callback: function (data) {
-        console.log("ajaxCompute", data);
-    }
-
-});
 ```
