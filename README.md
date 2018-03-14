@@ -6,13 +6,13 @@
 ###### 目录
 ```text
 src/
-├── worker/modules目录   业务耗时计算方法  
+├── worker/modules目录    业务内比较耗时的计算逻辑存放处
 ├── worker/index.js      编译时向worker注册的文件
 ├── worker/register      主线程与子线程通讯逻辑封装
 └── main.js              对外公开inWorker实例主文件
 ```
 
-向worker注入算法文件，worker/index.js文件示例：
+向worker注入文件，worker/index.js文件示例：
 
 ```
 import registerWorker from "./register";
