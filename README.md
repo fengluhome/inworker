@@ -52,7 +52,7 @@ inWorker.postMessage({
 });
 
 /**
- *Pression 写法
+ *Promise 写法
  */
 inWorker.postMessage({
     name: "compute.add",
@@ -61,7 +61,7 @@ inWorker.postMessage({
         b: 2
     },
 }).then((data) => {
-    console.log('Pression ', data);
+    console.log('Promise ', data);
 });
 
 /**     
