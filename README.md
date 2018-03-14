@@ -51,6 +51,19 @@ inWorker.postMessage({
 
 });
 
+/**
+ *Pression 写法
+ */
+inWorker.postMessage({
+    name: "compute.add",
+    argument: {
+        a: 1,
+        b: 2
+    },
+}).then((data) => {
+    console.log('Pression ', data);
+});
+
 /**     
  * 节流示例
  */

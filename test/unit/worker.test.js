@@ -18,6 +18,18 @@ inWorker.postMessage({
     }
 
 });
+/**
+ *Pression 写法
+ */
+inWorker.postMessage({
+    name: "compute.add",
+    argument: {
+        a: 1,
+        b: 2
+    },
+}).then((data) => {
+    console.log('Pression ', data);
+});
 
 /**     
  * 节流示例
@@ -60,15 +72,3 @@ inWorker.postMessage({
 
 });
 
-
-inWorker.postMessage({
-    name: "ajaxCompute.add",
-    argument: {
-        a: 1,
-        b: 2
-    },
-    callback: function (data) {
-        console.log("ajaxCompute", data);
-    }
-
-});

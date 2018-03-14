@@ -12,8 +12,10 @@ export class InWorker {
             } = event.data;
 
             let cacheFun = hash[id];
+
             cacheFun && cacheFun(data);
             hash[id] = null;
+            delete hash[id];
         };
     }
     postMessage({
@@ -23,29 +25,37 @@ export class InWorker {
     }) {
         if (!name) {
             throw new TypeError('name must be a String Path. example: a.b');
+        }
+        // if (!callback) {
+        //     throw new TypeError('callback must be a function.');
+        // }
 
-        }
-        if (!callback) {
-            throw new TypeError('callback must be a function.');
-        }
         //如果有ID
-        if (callback.id) {
+        if (callback && callback.id) {
             let cacheFun = hash[callback.id];
             if (cacheFun == callback) {
                 //delete
                 hash[callback.id] = null;
+                delete hash[callback.id];
             }
         }
         let id = prefix + (index++)
-        callback.id = id;
-        hash[id] = callback;
 
-        this.worker.postMessage({
-            id,
-            name: name,
-            argument: argument
+        return new Promise((resolve, reject) => {
+            if (callback) {
+                callback.id = id;
+                hash[id] = callback;
+            } else {
+                hash[id] = (result) => {
+                    resolve(result);
+                };
+            }
+            this.worker.postMessage({
+                id,
+                name: name,
+                argument: argument
+            });
         });
     }
-
 
 }
